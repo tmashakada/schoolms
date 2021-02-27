@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:param name="assignment" value="#{assignmentBean.assignment}"/>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12">
+                    <div class="card">
+                        <h1>New assignment</h1>
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                    </div>
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-7">
+                            <div class="card">
+                                <h3>Basic Info</h3>
+                                <p:inputText
+                                        id="assignmentName"
+                                        value="#{assignment.name}"
+                                        placeholder="Name"/>
+                                <p:inputTextarea
+                                        value="#{assignment.description}"
+                                        placeholder="Description" rows="10"
+                                        counter="display" maxlength="1000"
+                                        counterTemplate="{0} characters remaining."
+                                        style="margin-top: 10px"/>
+                                <h:outputText id="display" />
+                                <br/>
+                                <div class="ui-g-6">
+                                    <div><p:calendar
+                                            value="#{assignment.validFrom}"
+                                            placeholder="Valid from"/>
+                                    </div>
+                                </div>
+                                <div class="ui-g-6">
+                                    <div><p:calendar
+                                            value="#{assignment.validThrough}"
+                                            placeholder="Valid through"/></div>
+                                </div>
+                                <p:commandButton value="Save" action="assignments"
+                                                 actionListener="#{assignmentBean.saveAssignment()}"
+                                                 style="margin-top: 10px;"/>
+                            </div>
+                        </div>
+                        <div class="ui-g-5">
+                            <div class="card">
+                                <h3>Choose groups</h3>
+                                <p:dataTable value="#{studyGroupBean.studyGroups}" var="studyGroup"
+                                             selection="#{assignmentBean.selectedStudyGroups}" rowKey="#{studyGroup.id}"
+                                             selectionMode="multiple">
+                                    <p:column>#{studyGroup.name}</p:column>
+                                </p:dataTable>
+                            </div>
+                            <div class="card">
+                                <h3>Assignment Files</h3>
+                                <p:fileUpload fileUploadListener="#" mode="advanced"
+                                              dragDropSupport="false"
+                                              sizeLimit="400000" fileLimit="3"
+                                              allowTypes="/(\.|\/)(zip|rar)$/"/>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:param name="student" value="#{studentBean.student}"/>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card">
+                        <h1>Students Overview</h1>
+                        <p>Use this section to manage students.</p>
+                        <p:growl id="growl" showDetail="true" sticky="false" />
+                        <p:outputLabel for="studentName" value="Name: "/>
+                        <p:inputText id="studentName" value="#{student.student.name}" required="true"/>
+                        <p:commandButton value="Save"
+                                         action="#{studentBean.saveStudent()}"
+                                         style="margin-left: 5px;" icon="fa fa-floppy-o"
+                                         iconPos="left" update="students studentName growl"/>
+
+                    </div>
+
+                    <p:dataTable id="students" value="#{studentBean.students}" var="studentRecord">
+
+                        <p:column>#{studentRecord.name}</p:column>
+
+                    </p:dataTable>
+
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

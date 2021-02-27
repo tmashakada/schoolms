@@ -1,0 +1,19 @@
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title></title>
+    </h:head>
+    <h:body>
+
+        <p:spinner/>
+        #{studentBean.students.size()}
+        <p:outputLabel value="#{testBean.getHello()}"/>
+        <p:outputLabel value="#{studyGroupBean.studyGroups.size()}"/>
+
+
+    </h:body>
+</f:view>

@@ -1,0 +1,53 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:po="http://primefaces.org/omega">
+
+    <div class="sidebar">
+        <div class="nano">
+            <div class="nano-content sidebar-scroll-content">
+                <div class="logo">
+                    <p:graphicImage name="images/logo.png" library="omega-layout" width="113"/>
+                </div>
+
+                <div class="profile">
+                    <p:graphicImage name="images/profile.png" library="omega-layout" />
+                    <a id="profile-button" href="#">
+                        <span class="username">Peggy Olson</span>
+                        <i class="fa fa-fw fa-cog"></i>
+                    </a>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-fw fa-sliders"></i><span>Account</span></a></li>
+                        <li><a href="#"><i class="fa fa-fw fa-bell"></i><span>Notifications</span><span class="menu-badge">2</span></a></li>
+                        <li><a href="#"><i class="fa fa-fw fa-sign-out"></i><span>Logout</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="menu">
+                    <po:menu>
+                        <p:menuitem id="om_dashboard" value="Dashboard" icon="fa fa-home" outcome="/overview"/>
+
+                        <p:submenu label="Solution Store" icon="fa fa-sitemap">
+                            <p:menuitem id="om_sub_op" value="Currently opened" icon="fa fa-book" outcome="/views/openedStores"></p:menuitem>
+                            <p:menuitem id="om_sub_cl" value="Already closed" icon="fa fa-book" outcome="/views/closedStores"></p:menuitem>
+                            <p:menuitem id="om_sub_ov" value="Overview" icon="fa fa-book" outcome="/views/storesOverview"></p:menuitem>
+                        </p:submenu>
+
+                        <p:submenu label="Assignments" icon="fa fa-pencil-square-o">
+                            <p:menuitem id="om_ass" value="Overview" icon="fa fa-book" outcome="/views/assignments"/>
+                            <p:menuitem id="om_ass_new" value="Create" icon="fa fa-book" outcome="/views/createAssignment"/>
+                        </p:submenu>
+
+                        <p:menuitem id="om_stud" value="Students " icon="fa fa-users" outcome="/studentsOverview"/>
+                        <p:menuitem id="om_stug" value="Study Groups" icon="fa fa-book" outcome="/studyGroups"/>
+
+                    </po:menu>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ui:composition>

@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:param name="studyGroup" value="#{studyGroupBean.studyGroup}"/>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card">
+                        <h1>Assignments</h1>
+                        <p:growl id="growl" showDetail="true" sticky="false" />
+                    </div>
+
+                    <p:dataTable value="#{assignmentBean.assignments}" var="assignmentRecord">
+                        <p:column>#{assignmentRecord.name}</p:column>
+                        <p:column>#{assignmentRecord.validFrom}</p:column>
+                        <p:column>#{assignmentRecord.validThrough}</p:column>
+                        <p:column>
+                            <p:commandButton action="#{assignmentBean.showDetail()}" value="Detail" icon="fa fa-search" iconPos="right">
+                                <f:setPropertyActionListener value="#{assignmentRecord}" target="#{assignmentBean.assignment}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

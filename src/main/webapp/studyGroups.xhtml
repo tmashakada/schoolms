@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:param name="studyGroup" value="#{studyGroupBean.studyGroup}"/>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card">
+                        <h1>Overview</h1>
+                        <p>Use this form to create a new student group.</p>
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                        <p:outputLabel for="studyGroupName" value="Name: " style="cursor: pointer"/>
+                        <p:inputText id="studyGroupName" required="true" value="#{studyGroupBean.studyGroup.name}"
+                                     style="cursor: pointer"/>
+                        <p:commandButton
+                                actionListener="#{studyGroupBean.saveStudyGroup()}"
+                                value="Save" style="display:inline-block;margin-left:5px"
+                                icon="fa fa-floppy-o"
+                                iconPos="left"
+                                update="studyGroupTabView studyGroupName growl"/>
+                    </div>
+
+                    <p:tabView id="studyGroupTabView" value="#{studyGroupBean.studyGroups}" var="studyGroupRecord">
+                        <p:tab title="#{studyGroupRecord.name}">
+
+                            <p:dataTable id="students"
+                                         value="#{studyGroupBean.loadStudentForSelectedGroup(studyGroupRecord.id)}"
+                                         var="student">
+
+                                <p:column headerText="Name">#{student.name}</p:column>
+                                <p:column headerText="Study group">#{student.studyGroup.name}</p:column>
+
+                            </p:dataTable>
+
+                            <p:commandButton
+                                    action="#{studyGroupBean.selectStudents(studyGroupRecord)}"
+                                    value="Add students" style="margin-top: 10px;" process="@this">
+                                <p:ajax event="dialogReturn" update="students"/>
+                            </p:commandButton>
+
+                        </p:tab>
+                    </p:tabView>
+
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
